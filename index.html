@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Generator with jsPDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { padding: 10px 15px; background-color: #007BFF; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Generate PDF Document</h1>
+    <label for="title">Document Title:</label><br>
+    <input type="text" id="title" placeholder="Enter title"><br><br>
+
+    <label for="content">Content:</label><br>
+    <textarea id="content" rows="4" cols="50" placeholder="Enter content here..."></textarea><br><br>
+
+    <button onclick="generatePDF()">Generate PDF</button>
+
+    <script>
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+
+            doc.setFontSize(20);
+            doc.text(title, 10, 10);
+            doc.setFontSize(12);
+            doc.text(content, 10, 30);
+
+            doc.save("document.pdf");
+        }
+    </script>
+</body>
+</html>
